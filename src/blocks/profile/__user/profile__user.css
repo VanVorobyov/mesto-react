@@ -1,0 +1,12 @@
+.profile__user {
+  display: -ms-inline-flexbox;
+  display: -webkit-flex;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 18px;
+}
+@media screen and (max-width: 767px) {
+  .profile__user {
+    gap: 10px;
+  }
+}

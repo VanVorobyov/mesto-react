@@ -1,0 +1,6 @@
+.page {
+  max-width: 100%;
+  min-width: 320px;
+  height: 100%;
+  background-color: #000;
+}
