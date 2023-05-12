@@ -11,15 +11,24 @@ function App(props) {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+  const [isFullImagePopupOpen, setFullImagePopupOpen] = useState(false);
+
+  const [selectedCard, setSelectedCard] = useState({});
 
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
 
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setFullImagePopupOpen(true);
+  };
   const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
+    setFullImagePopupOpen(false);
+    setSelectedCard(false);
   };
 
   return (
@@ -29,6 +38,7 @@ function App(props) {
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
       <Footer />
       <EditProfie
@@ -43,7 +53,11 @@ function App(props) {
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       />
-      <ImagePopup isOpen />
+      <ImagePopup
+        card={selectedCard}
+        isOpen={isFullImagePopupOpen}
+        onClose={closeAllPopups}
+      />
 
       {/* <!-- popup confirm delete --> */}
       {/* <template id="card-template">

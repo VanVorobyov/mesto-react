@@ -17,6 +17,7 @@ function EditAvatar(props) {
             name="avatar"
             placeholder="Ссылка на фото"
             autocomplete="off"
+            minLength="2"
             required
           />
           <span className="popup__error popup__error_input_avatar"></span>
