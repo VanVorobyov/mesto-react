@@ -8,8 +8,7 @@ function AddPlace(props) {
       title={'Новое место'}
       name={'add-card'}
       buttonText={'Создать'}
-      children={
-        <>
+    >
           <div className="popup__input-container">
             <input
               id="input_card-title"
@@ -18,8 +17,8 @@ function AddPlace(props) {
               name="name"
               placeholder="Название"
               value=""
-              minlength="2"
-              maxlength="30"
+              minLength="2"
+              maxLength="30"
               autocomplete="off"
               required
             />
@@ -37,9 +36,7 @@ function AddPlace(props) {
             />
             <span className="popup__error popup__error_input_card-image"></span>
           </div>
-        </>
-      }
-    />
+    </PopupWithForm>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import api from '../utils/Api.js';
 import Card from './Card.js';
 
@@ -24,7 +24,6 @@ function Main(props) {
 
   return (
     <main className="content">
-      {/* <!-- profile --> */}
       <section className="profile">
         <div className="profile__image-container">
           <img
@@ -57,7 +56,6 @@ function Main(props) {
         ></button>
       </section>
 
-      {/* <!-- Elements --> */}
       <section
         className="elements"
         aria-label="elements"

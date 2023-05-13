@@ -14,7 +14,7 @@ function PopupWithForm(props) {
           action="#"
           method="post"
           name={`${name}-form`}
-          novalidate
+          noValidate
         >
           {children}
           <button
@@ -22,7 +22,7 @@ function PopupWithForm(props) {
             type="submit"
             disabled
           >
-            {buttonText}
+            {buttonText || 'Сохранить'}
           </button>
         </form>
       </div>
