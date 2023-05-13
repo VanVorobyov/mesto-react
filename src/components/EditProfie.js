@@ -18,7 +18,7 @@ function EditProfile(props) {
           placeholder="Имя пользователя"
           minLength="2"
           maxLength="40"
-          autocomplete="off"
+          autoComplete="off"
           required
         />
         <span className="popup__error popup__error_input_element-user"></span>
@@ -33,7 +33,7 @@ function EditProfile(props) {
           placeholder="О себе"
           minLength="2"
           maxLength="200"
-          autocomplete="off"
+          autoComplete="off"
           required
         />
         <span className="popup__error popup__error_input_element-about"></span>
