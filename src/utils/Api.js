@@ -52,14 +52,14 @@ class Api {
   }
 
   putLike(card) {
-    return this._request(`${this._baseUrl}/cards/likes/${card._id}`, {
+    return this._request(`${this._baseUrl}/cards/likes/${card}`, {
       method: 'PUT',
       headers: this._headers,
     });
   }
 
   removeLike(card) {
-    return this._request(`${this._baseUrl}/cards/likes/${card._id}`, {
+    return this._request(`${this._baseUrl}/cards/likes/${card}`, {
       method: 'DELETE',
       headers: this._headers,
     });

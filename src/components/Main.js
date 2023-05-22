@@ -1,33 +1,18 @@
-import { useState, useEffect } from 'react';
-import api from '../utils/Api.js';
 import Card from './Card.js';
+import { useContext } from 'react'
+import { CurrentUserContext } from '../context/CurrentUserContext.js';
+
 
 function Main(props) {
-  const { onEditAvatar, onEditProfile, onAddPlace, onCardClick } = props;
-
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('#');
-
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([{ avatar, name, about }, initialCards]) => {
-        setUserAvatar(avatar);
-        setUserName(name);
-        setUserDescription(about);
-        setCards(initialCards);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const { onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete, cards } = props;
+  const currentUser = useContext(CurrentUserContext)
 
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__image-container">
           <img
-            src={userAvatar}
+            src={currentUser.avatar}
             alt="Фотография профиля"
             className="profile__image"
           />
@@ -40,14 +25,14 @@ function Main(props) {
         </div>
         <div className="profile__info">
           <div className="profile__user">
-            <h1 className="profile__user-title">{userName}</h1>
+            <h1 className="profile__user-title">{currentUser.name}</h1>
             <button
               className="profile__button-edit"
               type="button"
               onClick={onEditProfile}
             ></button>
           </div>
-          <p className="profile__user-subtitle">{userDescription}</p>
+          <p className="profile__user-subtitle">{currentUser.about}</p>
         </div>
         <button
           className="profile__button-add"
@@ -67,6 +52,8 @@ function Main(props) {
                 key={card._id}
                 card={card}
                 onCardClick={onCardClick}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
               ></Card>
             );
           })}
