@@ -3,7 +3,7 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext)
-  const isOwn = card.owner._id === currentUser._id;
+  // const isOwn = card.owner._id === currentUser._id;
   const isLiked = card.likes.some(like => like._id === currentUser._id);
   const cardLikeButtonClassName = ( 
     `card__button ${isLiked ? 'card__button_icon-fill' : 'card__button_icon-empty'}` 
@@ -13,11 +13,11 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     onCardClick(card);
   }
 
-  function handleDeleteClick() {
+  function handleLikeClick() {
     onCardLike(card);
   }
 
-  function handleLikeClick() {
+  function handleDeleteClick() {
     onCardDelete(card);
   }
 
@@ -40,7 +40,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
           <p className="card__counter">{card.likes.length}</p>
         </div>
 
-        {isOwn && <button
+        {<button
           className="card__delete-button card__delete-button_js"
           type="button"
           onClick={handleDeleteClick}

@@ -23,6 +23,14 @@ function EditProfilePopup(props) {
     });
   } 
 
+  function handleUserName(e) {
+    setUserName(e.target.value);
+  }
+
+  function handleUserAbout(e) {
+    setUserAbout(e.target.value);
+  }
+
   return (
     <PopupWithForm
       isOpen={props.isOpen}
@@ -42,6 +50,7 @@ function EditProfilePopup(props) {
           minLength="2"
           maxLength="40"
           autoComplete="off"
+          onChange={handleUserName}
           required
         />
         <span className="popup__error popup__error_input_element-user"></span>
@@ -57,6 +66,7 @@ function EditProfilePopup(props) {
           minLength="2"
           maxLength="200"
           autoComplete="off"
+          onChange={handleUserAbout}
           required
         />
         <span className="popup__error popup__error_input_element-about"></span>

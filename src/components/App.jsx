@@ -4,8 +4,8 @@ import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
 import EditProfiePopup from './EditProfiePopup';
-import EditAvatar from './EditAvatar';
-import AddPlace from './AddPlace';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 import api from '../utils/Api.js';
 import {CurrentUserContext} from '../context/CurrentUserContext.js';
 
@@ -70,14 +70,36 @@ function App(props) {
       .catch((err) => console.log(err));
   }
 
-  const handleUpdateUser = () => {
+  const handleUpdateUser = (info) => {
     api
-    .setUserInfo()
+    .setUserInfo(info)
     .then((newUser) => {
       setCurrentUser(newUser)
+      closeAllPopups()
   })
   .catch((err) => console.log(err));
 }
+
+  const handleUpdateAvatar = (avatar) => {
+    api
+      .changeAvatar(avatar)
+      .then((newAvatar) => {
+        setCurrentUser(newAvatar)
+        closeAllPopups()
+  })
+  .catch((err) => console.log(err));
+  }
+
+  const handleAddPlaceSubmit = (card) => { 
+      api
+        .postCard(card)
+        .then((newCard) => {
+          setCards([newCard, ...cards])
+          closeAllPopups()
+        })
+        .catch((err) => console.log(err));
+      }
+    
 
   const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
@@ -107,13 +129,15 @@ function App(props) {
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
         />
-        <EditAvatar
+        <EditAvatarPopup
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
         />
-        <AddPlace
+        <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        onAddPlace={handleAddPlaceSubmit}
         />
         <ImagePopup
           card={selectedCard}
