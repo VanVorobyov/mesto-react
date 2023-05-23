@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
-  const {isOpen, onClose, onUpdateAvatar} = props;
+  const {isOpen, onClose, onUpdateAvatar, isLoading} = props;
   const avatarRef = useRef('')
   
 
@@ -21,6 +21,10 @@ function EditAvatarPopup(props) {
       title={'Обновить аватар'}
       name={'edit-avatar'}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      buttonText="Cохранить"
+      loadingText={'Сохранение...'}
+
     >
       <input
         ref={avatarRef}

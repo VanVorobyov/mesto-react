@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 function EditProfilePopup(props) {
-  const {isOpen, onClose, onUpdateUser} = props
+  const {isOpen, onClose, onUpdateUser, isLoading} = props
   const currentUser = useContext(CurrentUserContext)
 
   const[userName, setUserName] = useState('')
@@ -38,6 +38,11 @@ function EditProfilePopup(props) {
       title={'Редактировать профиль'}
       name={'edit-profile'}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      buttonText="Cохранить"
+      loadingText={'Сохранение...'}
+
+
     >
       <div className="popup__input-container">
         <input

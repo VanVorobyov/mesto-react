@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlace(props) {
-  const {isOpen, onClose, onAddPlace} = props;  
+  const {isOpen, onClose, onAddPlace, isLoading} = props;  
 
   const [cardName, setCardName] = useState(''); 
   const [cardLink, setCardLink] = useState('');
@@ -31,6 +31,8 @@ function AddPlace(props) {
       name={'add-card'}
       buttonText={'Создать'}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      loadingText={'Сохранение...'}
     >
           <div className="popup__input-container">
             <input
