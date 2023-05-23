@@ -13,7 +13,7 @@ function EditProfilePopup(props) {
   useEffect(() => {
     setUserName(currentUser.name);
     setUserAbout(currentUser.about);
-  }, [currentUser]); 
+  }, [currentUser, isOpen]); 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -41,8 +41,6 @@ function EditProfilePopup(props) {
       isLoading={isLoading}
       buttonText="Cохранить"
       loadingText={'Сохранение...'}
-
-
     >
       <div className="popup__input-container">
         <input
@@ -50,7 +48,7 @@ function EditProfilePopup(props) {
           className="popup__input popup__input_user-info_username"
           type="text"
           name="name"
-          value={userName}
+          value={userName || ''}
           placeholder="Имя пользователя"
           minLength="2"
           maxLength="40"
@@ -66,7 +64,7 @@ function EditProfilePopup(props) {
           className="popup__input popup__input_user-info_about"
           type="text"
           name="about"
-          value={userAbout}
+          value={userAbout || ''}
           placeholder="О себе"
           minLength="2"
           maxLength="200"

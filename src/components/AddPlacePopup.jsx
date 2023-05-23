@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlace(props) {
+function AddPlacePopup(props) {
   const {isOpen, onClose, onAddPlace, isLoading} = props;  
 
   const [cardName, setCardName] = useState(''); 
@@ -48,11 +48,10 @@ function AddPlace(props) {
               type="text"
               name="name"
               placeholder="Название"
-              value={cardName}
+              value={cardName || ''}
               onChange={handleCardName}
               minLength="2"
               maxLength="30"
-              autoСomplete="off"
               required
             />
             <span className="popup__error popup__error_input_card-title"></span>
@@ -66,7 +65,6 @@ function AddPlace(props) {
               placeholder="Ссылка на картинку"
               value={cardLink}
               onChange={handleCardLink}
-              autoСomplete="off"
               required
             />
             <span className="popup__error popup__error_input_card-image"></span>
@@ -75,4 +73,4 @@ function AddPlace(props) {
   );
 }
 
-export default AddPlace;
+export default AddPlacePopup;
