@@ -29,7 +29,7 @@ function EditAvatarPopup(props) {
         type="url"
         name="avatar"
         placeholder="Ссылка на фото"
-        autocomplete="off"
+        autoСomplete="off"
         minLength="2"
         required
       />

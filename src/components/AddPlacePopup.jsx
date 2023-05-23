@@ -43,7 +43,7 @@ function AddPlace(props) {
               onChange={handleCardName}
               minLength="2"
               maxLength="30"
-              autocomplete="off"
+              autoСomplete="off"
               required
             />
             <span className="popup__error popup__error_input_card-title"></span>
@@ -57,7 +57,7 @@ function AddPlace(props) {
               placeholder="Ссылка на картинку"
               value={cardLink}
               onChange={handleCardLink}
-              autocomplete="off"
+              autoСomplete="off"
               required
             />
             <span className="popup__error popup__error_input_card-image"></span>

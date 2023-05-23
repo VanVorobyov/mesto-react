@@ -45,7 +45,7 @@ class Api {
   }
 
   deleteCard(card) {
-    return this._request(`${this._baseUrl}/cards/${card._id}`, {
+    return this._request(`${this._baseUrl}/cards/${card}`, {
       method: 'DELETE',
       headers: this._headers,
     });

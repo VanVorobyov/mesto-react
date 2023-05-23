@@ -32,6 +32,7 @@
 @import url(./blocks/card/__button/card__button.css);
 @import url(./blocks/card/__button/_icon-fill/card__button_icon-fill.css);
 @import url(./blocks/card/__delete-button/card__delete-button.css);
+@import url(./blocks/card/__delete-button/_active/card__delete-button_active.css);
 @import url(./blocks/card/__counter/card__counter.css);
 @import url(./blocks/card/__like-container/card__like-container.css);
 /* footer */
