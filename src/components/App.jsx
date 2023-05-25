@@ -6,6 +6,7 @@ import ImagePopup from './ImagePopup';
 import EditProfiePopup from './EditProfiePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import ConfirmDeletePopup from './ConfirmDeletePopup'
 import api from '../utils/Api.js';
 import {CurrentUserContext} from '../context/CurrentUserContext.js';
 
@@ -14,6 +15,8 @@ function App(props) {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isFullImagePopupOpen, setFullImagePopupOpen] = useState(false);
+  const [isConfirmDeletePopupOpen, setConfirmDeletePopupOpen] = useState(false);
+
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
@@ -32,6 +35,9 @@ function App(props) {
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
+  const handleEditConfirmDeleteClick = () => setConfirmDeletePopupOpen(true);
+
+
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -121,6 +127,7 @@ function App(props) {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setFullImagePopupOpen(false);
+    setConfirmDeletePopupOpen(false)
     setSelectedCard({});
   };
 
@@ -134,7 +141,7 @@ function App(props) {
         onAddPlace={handleAddPlaceClick}
         onCardClick={handleCardClick}
         onCardLike={handleCardLike}
-        onCardDelete={handleCardDelete}
+        onDeleteConfirm={handleEditConfirmDeleteClick}
         currentUser={currentUser}
         cards={cards}
         />
@@ -161,7 +168,17 @@ function App(props) {
           card={selectedCard}
           isOpen={isFullImagePopupOpen}
           onClose={closeAllPopups}
+          />
+        <ConfirmDeletePopup
+          card={selectedCard}
+          isOpen={isConfirmDeletePopupOpen}
+          onClose={closeAllPopups}
+          onDeleteConfirm={handleEditConfirmDeleteClick}
+          isLoading={isLoading}
+          onCardDelete={handleCardDelete}
         />
+
+
       </div>
     </CurrentUserContext.Provider>
   );

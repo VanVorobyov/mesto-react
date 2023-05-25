@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 
 function Main(props) {
-  const { onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete, cards } = props;
+  const { onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onDeleteConfirm, cards } = props;
   const currentUser = useContext(CurrentUserContext)
 
   return (
@@ -53,7 +53,7 @@ function Main(props) {
                 card={card}
                 onCardClick={onCardClick}
                 onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
+                onDeleteConfirm={onDeleteConfirm}
               ></Card>
             );
           })}
