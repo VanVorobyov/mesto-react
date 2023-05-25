@@ -19,6 +19,7 @@ function App(props) {
 
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
+  const [cardToDelete, setCardToDelete] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,13 +36,18 @@ function App(props) {
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
-  const handleEditConfirmDeleteClick = () => setConfirmDeletePopupOpen(true);
+
 
 
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setFullImagePopupOpen(true);
+  };
+
+  const handleTrashClick = (card) => {
+    setCardToDelete(card);
+    setConfirmDeletePopupOpen(true)
   };
 
   const handleCardLike = (card) => {
@@ -75,6 +81,7 @@ function App(props) {
           c._id === card._id ? "" : newCard
         );
         setCards(newCards);
+        closeAllPopups()
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
@@ -83,7 +90,6 @@ function App(props) {
 
   const handleUpdateUser = (info) => {
   setIsLoading(true);
-
     api
     .setUserInfo(info)
     .then((newUser) => {
@@ -96,7 +102,6 @@ function App(props) {
 
   const handleUpdateAvatar = (avatar) => {
     setIsLoading(true);
-
     api
       .changeAvatar(avatar)
       .then((newAvatar) => {
@@ -120,7 +125,6 @@ function App(props) {
         .finally(() => setIsLoading(false));
 
       }
-    
 
   const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
@@ -141,7 +145,7 @@ function App(props) {
         onAddPlace={handleAddPlaceClick}
         onCardClick={handleCardClick}
         onCardLike={handleCardLike}
-        onDeleteConfirm={handleEditConfirmDeleteClick}
+        onCardDelete={handleTrashClick}
         currentUser={currentUser}
         cards={cards}
         />
@@ -170,12 +174,11 @@ function App(props) {
           onClose={closeAllPopups}
           />
         <ConfirmDeletePopup
-          card={selectedCard}
+          card={cardToDelete}
           isOpen={isConfirmDeletePopupOpen}
           onClose={closeAllPopups}
-          onDeleteConfirm={handleEditConfirmDeleteClick}
           isLoading={isLoading}
-          onCardDelete={handleCardDelete}
+          onSubmit={handleCardDelete}
         />
 
 

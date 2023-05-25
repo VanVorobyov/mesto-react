@@ -1,11 +1,11 @@
 import PopupWithForm from './PopupWithForm';
 
 function ConfirmDeletePopup(props) {
-  const {isOpen, onClose, isLoading, onCardDelete, card} = props;
+  const {isOpen, onClose, isLoading, onSubmit, card} = props;
 
   function handleSubmit(e) {
     e.preventDefault();
-    onCardDelete(card)
+    onSubmit(card)
   } 
 
   return (
