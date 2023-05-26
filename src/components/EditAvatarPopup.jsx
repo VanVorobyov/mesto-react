@@ -1,11 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
-  const {isOpen, onClose, onUpdateAvatar} = props;
+  const {isOpen, onClose, onUpdateAvatar, isLoading} = props;
   const avatarRef = useRef('')
   
-
+  useEffect(() => {
+    if (!isOpen) {
+      avatarRef.current.value = '';
+    }
+}, [isOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,6 +25,10 @@ function EditAvatarPopup(props) {
       title={'Обновить аватар'}
       name={'edit-avatar'}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      buttonText="Cохранить"
+      loadingText={'Сохранение...'}
+
     >
       <input
         ref={avatarRef}
@@ -29,7 +37,6 @@ function EditAvatarPopup(props) {
         type="url"
         name="avatar"
         placeholder="Ссылка на фото"
-        autoСomplete="off"
         minLength="2"
         required
       />

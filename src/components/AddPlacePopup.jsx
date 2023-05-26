@@ -1,11 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlace(props) {
-  const {isOpen, onClose, onAddPlace} = props;  
+function AddPlacePopup(props) {
+  const {isOpen, onClose, onAddPlace, isLoading} = props;  
 
   const [cardName, setCardName] = useState(''); 
   const [cardLink, setCardLink] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) {
+      setCardName('')
+      setCardLink('')
+    }
+}, [isOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,6 +38,8 @@ function AddPlace(props) {
       name={'add-card'}
       buttonText={'Создать'}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      loadingText={'Сохранение...'}
     >
           <div className="popup__input-container">
             <input
@@ -39,11 +48,10 @@ function AddPlace(props) {
               type="text"
               name="name"
               placeholder="Название"
-              value={cardName}
+              value={cardName || ''}
               onChange={handleCardName}
               minLength="2"
               maxLength="30"
-              autoСomplete="off"
               required
             />
             <span className="popup__error popup__error_input_card-title"></span>
@@ -57,7 +65,6 @@ function AddPlace(props) {
               placeholder="Ссылка на картинку"
               value={cardLink}
               onChange={handleCardLink}
-              autoСomplete="off"
               required
             />
             <span className="popup__error popup__error_input_card-image"></span>
@@ -66,4 +73,4 @@ function AddPlace(props) {
   );
 }
 
-export default AddPlace;
+export default AddPlacePopup;

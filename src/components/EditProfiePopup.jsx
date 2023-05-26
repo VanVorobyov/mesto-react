@@ -5,7 +5,8 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js';
 import useValidation from '../hooks/useValidation';
 
 function EditProfilePopup(props) {
-  const {isOpen, onClose, onUpdateUser} = props
+
+  const {isOpen, onClose, onUpdateUser, isLoading} = props
   const {values, handleChange, errors, isValid, setValues, resetForm} = useValidation({name: '', about: ''})
   const currentUser = useContext(CurrentUserContext)
 
@@ -49,6 +50,9 @@ function EditProfilePopup(props) {
       name={'edit-profile'}
       onSubmit={handleSubmit}
       isValid={isValid}
+      isLoading={isLoading}
+      buttonText="Cохранить"
+      loadingText={'Сохранение...'}
     >
       <div className="popup__input-container">
         <input
@@ -56,7 +60,7 @@ function EditProfilePopup(props) {
           className="popup__input popup__input_user-info_username"
           type="text"
           name="name"
-          value={values.name}
+          value={values.name || ''}
           placeholder="Имя пользователя"
           minLength="2"
           maxLength="40"
@@ -72,7 +76,7 @@ function EditProfilePopup(props) {
           className="popup__input popup__input_user-info_about"
           type="text"
           name="about"
-          value={values.about}
+          value={values.about || ''}
           placeholder="О себе"
           minLength="2"
           maxLength="200"

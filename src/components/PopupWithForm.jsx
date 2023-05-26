@@ -1,5 +1,8 @@
+import usePopupClose from '../hooks/usePopupClose'
+
 function PopupWithForm(props) {
-  const { title, name, children, isOpen, onClose, onSubmit, buttonText, isValid } = props;
+  const { title, name, children, isOpen, onClose, onSubmit, buttonText, isValid, isLoading, loadingText } = props;
+  usePopupClose(isOpen, onClose)
   return (
     <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__container">
@@ -23,7 +26,7 @@ function PopupWithForm(props) {
             type="submit"
             disabled={!isValid}
           >
-            {buttonText || 'Сохранить'}
+            {isLoading ? loadingText : buttonText}
           </button>
         </form>
       </div>
