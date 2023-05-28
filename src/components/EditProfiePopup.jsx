@@ -15,7 +15,7 @@ function EditProfilePopup(props) {
       name: currentUser.name,
       workplace: currentUser.about
   });
-  }, [currentUser]); 
+  }, [currentUser, setValues]); 
 
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function EditProfilePopup(props) {
     }
     if (!isOpen)
     resetForm();
-}, [isOpen])
+}, [currentUser.about, currentUser.name, isOpen, resetForm, setValues])
 
 
 
