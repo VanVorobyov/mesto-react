@@ -56,32 +56,32 @@ function EditProfilePopup(props) {
     >
       <div className="popup__input-container">
         <input
-          id="input_element-user"
           className="popup__input popup__input_user-info_username"
+          value={values.name || ''}
+          onChange={handleChange}
+          id="input_element-user"
           type="text"
           name="name"
-          value={values.name || ''}
-          placeholder="Имя пользователя"
           minLength="2"
           maxLength="40"
+          placeholder="Имя пользователя"
           autoComplete="off"
-          onChange={handleChange}
           required
         />
         <span className={`popup__error popup__error_input_element-user ${isValid ? '' : 'popup__error_visible'}`}>{errors.name}</span>
       </div>
       <div className="popup__input-container">
         <input
-          id="input_element-about"
           className="popup__input popup__input_user-info_about"
+          value={values.about || ''}
+          onChange={handleChange}
+          id="input_element-about"
           type="text"
           name="about"
-          value={values.about || ''}
-          placeholder="О себе"
           minLength="2"
           maxLength="200"
+          placeholder="О себе"
           autoComplete="off"
-          onChange={handleChange}
           required
         />
         <span className={`popup__error popup__error_input_element-user ${isValid ? '' : 'popup__error_visible'}`}>{errors.about}</span>

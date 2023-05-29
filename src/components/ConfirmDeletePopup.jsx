@@ -1,5 +1,6 @@
 import PopupWithForm from './PopupWithForm';
 
+
 function ConfirmDeletePopup(props) {
   const {isOpen, onClose, isLoading, onSubmit, card} = props;
 
@@ -18,6 +19,8 @@ function ConfirmDeletePopup(props) {
     isLoading={isLoading}
     buttonText="Да"
     loadingText={'Удаление...'}
+    isDisabled={false}
+    isValid={true}
     ></PopupWithForm>
   );
 }

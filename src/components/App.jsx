@@ -38,8 +38,6 @@ function App(props) {
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
 
 
-
-
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setFullImagePopupOpen(true);
