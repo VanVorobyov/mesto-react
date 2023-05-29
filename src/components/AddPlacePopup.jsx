@@ -1,34 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
+import useValidation from '../hooks/useValidation' 
 
 function AddPlacePopup(props) {
   const {isOpen, onClose, onAddPlace, isLoading} = props;  
-
-  const [cardName, setCardName] = useState(''); 
-  const [cardLink, setCardLink] = useState('');
+  const {values, handleChange, errors, isValid, isDisabled, resetForm} = useValidation({name: '', link: ''})
 
   useEffect(() => {
-    if (!isOpen) {
-      setCardName('')
-      setCardLink('')
-    }
-}, [isOpen])
+      if (!isOpen){
+        resetForm();
+      }
+}, [isOpen, resetForm])
+
 
   function handleSubmit(e) {
     e.preventDefault();
-    onAddPlace({
-      name: cardName,
-      link: cardLink
-    })
+    if(isValid){
+      onAddPlace({
+        name: values.name,
+        link: values.link
+      })
+    }
   } 
-
-  function handleCardName(e) {
-    setCardName(e.target.value);
-  }
-
-  function handleCardLink(e) {
-    setCardLink(e.target.value);
-  }
 
   return (
     <PopupWithForm
@@ -40,34 +33,36 @@ function AddPlacePopup(props) {
       onSubmit={handleSubmit}
       isLoading={isLoading}
       loadingText={'Сохранение...'}
+      isValid={isValid}
+      isDisabled={isDisabled}
     >
           <div className="popup__input-container">
             <input
-              id="input_card-title"
               className="popup__input popup__input_card_title"
+              value={values.name || ''}
+              onChange={handleChange}
+              id="input_card-title"
               type="text"
               name="name"
               placeholder="Название"
-              value={cardName || ''}
-              onChange={handleCardName}
               minLength="2"
               maxLength="30"
               required
             />
-            <span className="popup__error popup__error_input_card-title"></span>
+            <span className={`popup__error popup__error_input_card-title ${isValid ? '' : 'popup__error_visible'}`}>{errors.name}</span>
           </div>
           <div className="popup__input-container">
             <input
-              id="input_card-image"
               className="popup__input popup__input_card_image"
+              value={values.link || ''}
+              onChange={handleChange}
+              id="input_card-image"
               type="url"
               name="link"
               placeholder="Ссылка на картинку"
-              value={cardLink}
-              onChange={handleCardLink}
               required
             />
-            <span className="popup__error popup__error_input_card-image"></span>
+            <span className={`popup__error popup__error_input_card-image ${isValid ? '' : 'popup__error_visible'}`}>{errors.link}</span>
           </div>
     </PopupWithForm>
   );
